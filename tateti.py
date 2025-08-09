@@ -12,12 +12,11 @@ class Tateti:
     def ocupar_casilla(self, fila, col):
         try:
             self.tablero.poner_ficha(fila, col, self.turno)
-            if self.chequear_ganador(fila, col):
-                self.ganador = self.turno
-            else:
-                self.cambiar_turno()
+            self.cambiar_turno()
+            return True
         except PosOcupadaException as e:
             print(e)
+            return False
 
     def chequear_ganador(self, fila, col):
         ficha = self.tablero.contenedor[fila][col]
