@@ -21,6 +21,17 @@ def main():
             fila = int(input("Ingrese fila (0-2): "))
             col = int(input("Ingrese columna (0-2): "))
             juego.ocupar_casilla(fila, col)
+
+            if juego.ganador:
+                print(f"\n¡Felicidades! Ganó el jugador {juego.ganador}")
+                juego.tablero.mostrar()
+                break
+
+            if juego.tablero_lleno():
+                print("\n¡Empate! No quedan más movimientos.")
+                juego.tablero.mostrar()
+                break
+
         except ValueError:
             print("Por favor, ingrese un número válido.")
         except Exception as e:
