@@ -2,17 +2,17 @@ from tateti import Tateti
 from jugador import Jugador
 
 def main():
-    print("Bienvenidos al juego de Ta-Te-Ti")
+    print("Bienvenidos al juego de Tateti")
     print("Para salir en cualquier momento, ingrese 'salir'.")
     print("Para reiniciar el juego, ingrese 'reiniciar'.\n")
 
-    while True:
+    while True:  # ciclo para reiniciar juego completo
         nombre1 = input("Nombre del Jugador 1 (X): ")
         if nombre1.lower() == "salir":
             print("Gracias por jugar. ¡Hasta luego!")
             break
         if nombre1.lower() == "reiniciar":
-            print("Reiniciando juego...")
+            print("Reiniciando juego...\n")
             continue
 
         nombre2 = input("Nombre del Jugador 2 (O): ")
@@ -20,14 +20,13 @@ def main():
             print("Gracias por jugar. ¡Hasta luego!")
             break
         if nombre2.lower() == "reiniciar":
-            print("Reiniciando juego...")
+            print("Reiniciando juego...\n")
             continue
 
         jugador1 = Jugador(nombre1, "X")
         jugador2 = Jugador(nombre2, "O")
 
-        juego = Tateti()
-
+        juego = Tateti()  
         while True:
             print("\nEstado del tablero:")
             juego.tablero.mostrar()
@@ -70,7 +69,8 @@ def main():
                 continue
 
             if entrada_fila == "reiniciar" or entrada_col == "reiniciar":
-                continue
+                # Salir del bucle para reiniciar el juego completo
+                break
 
             if juego.chequear_ganador(fila, col):
                 juego.ganador = juego.tablero.contenedor[fila][col]
@@ -83,6 +83,11 @@ def main():
                 juego.tablero.mostrar()
                 break
 
+        # Si se pidió reiniciar, volver a pedir nombres 
+        if entrada_fila == "reiniciar" or entrada_col == "reiniciar":
+            continue
+
+        # Preguntar si quiere jugar otra vez después de terminar la partida
         while True:
             resp = input("\n¿Querés jugar otra vez? (s/n): ").strip().lower()
             if resp == "s":
